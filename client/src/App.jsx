@@ -4,13 +4,14 @@ import { logo } from './assets'
 import { Home, CreatePost, Login, Register } from './pages';
 import { useLogout } from './hooks/useLogout'
 import { useAuthContext } from './hooks/useAuthContext'
-// import { AuthContext } from './context/authContext';
+import { AuthContext } from './context/authContext';
 
 const App = () => {
   // console.log("Hell");
   const { logout } = useLogout()
 
-  const { user } = useAuthContext;
+  // const { user } = useAuthContext;
+  const { user } = useContext(AuthContext);
 
   const handleClick = () => {
     logout()
