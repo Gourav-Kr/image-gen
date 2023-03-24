@@ -26,7 +26,7 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/post', {
+      const response = await fetch('/api/v1/post', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -36,9 +36,11 @@ const Home = () => {
       if (response.ok) {
         const result = await response.json();
         setAllPosts(result.data.reverse());
+        console.log(result)
       }
     } catch (err) {
       alert("Error: "+err);
+      console.log("Error: "+err);
     } finally {
       setLoading(false);
     }
