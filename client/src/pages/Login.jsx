@@ -1,7 +1,11 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { login, error, isLoading } = useLogin()
@@ -10,6 +14,7 @@ const Login = () => {
         e.preventDefault()
 
         await login(email, password)
+        // navigate('/');
     }
 
     return (
@@ -30,6 +35,7 @@ const Login = () => {
             />
 
             <button disabled={isLoading} className=" text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center">Log In</button>
+            <button  className='text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center mx-4' onClick={()=>{navigate("/register")}} >Register</button>
             {error && <div className="error">{error}</div>}
             {isLoading && <div className="loading">loading...</div>}
         </form>

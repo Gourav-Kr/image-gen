@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useContext, useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from '../components';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const CreatePost = () => {
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const { user } = useAuthContext();
+  // console.log(user)
   const [form, setForm] = useState({
-    name: '',
+    name: "",
     prompt: '',
     photo: '',
   });
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setForm({ ...form, name: user.email })
+    }
+  }, [])
+  
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -25,6 +37,10 @@ const CreatePost = () => {
   };
 
   const generateImage = async () => {
+    if (!user) {
+      setError('You must be logged in')
+      return
+    }
     if (form.prompt) {
       try {
         setGeneratingImg(true);
@@ -32,6 +48,7 @@ const CreatePost = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
           },
           body: JSON.stringify({ prompt: form.prompt, }),
         });
@@ -58,6 +75,8 @@ const CreatePost = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+
           },
           body: JSON.stringify({ ...form }),
         });
@@ -136,6 +155,7 @@ const CreatePost = () => {
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
         </div>
+        {error && <div className="error">{error}</div>}
 
         <div className="mt-10">
           <p className="mt-2 text-[#666e75] text-[14px]">** Once you have created the image you want, you can share it with others in the community **</p>

@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { useRegister } from "../hooks/useRegister.js"
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
@@ -37,6 +39,7 @@ const Register = () => {
             />
 
             <button disabled={isLoading} className=" text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center">Register</button>
+            <button  className='text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center mx-4' onClick={()=>{navigate("/login")}} >Login</button>
             {error && <div className="error">{error}</div>}
             {isLoading && <div className="loading">loading...</div>}
         </form>

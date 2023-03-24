@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from './useAuthContext'
 
 export const useLogin = () => {
+    const navigate = useNavigate();
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
@@ -30,6 +32,7 @@ export const useLogin = () => {
 
             // update loading state
             setIsLoading(false)
+            navigate('/');
         }
     }
 

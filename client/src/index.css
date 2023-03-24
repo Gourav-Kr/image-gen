@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --primary: #1aac83;
+  --primary: #6469ff;
   --error: #e7195a;
 }
 
@@ -84,8 +84,8 @@ form.register, form.login {
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
+  padding: 6px 8px;
+  border-radius: .25rem;
   font-family: "Poppins";
   cursor: pointer;
   font-size: 1em;
@@ -95,8 +95,8 @@ form.register, form.login {
   background: var(--primary);
   color: #fff;
   border: 2px solid white;
-  padding: 6px 10px;
-  border-radius: 4px;
+  padding: 7px 10px;
+  border-radius: .25rem;
   font-family: "Poppins";
   cursor: pointer;
   font-size: 1em;

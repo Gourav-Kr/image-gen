@@ -4,7 +4,13 @@ import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config();
 
+import  requireAuth  from "../middleware/requireAuth.js"
+// const requireAuth=require("../middleware/requireAuth.js")
+
 const router = express.Router();
+
+//Auth for all routes
+router.use(requireAuth)
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,

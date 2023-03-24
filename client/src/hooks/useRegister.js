@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
+import { useNavigate } from 'react-router-dom';
 
 export const useRegister = () => {
+    const navigate = useNavigate();
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
@@ -30,6 +32,7 @@ export const useRegister = () => {
 
             // update loading state
             setIsLoading(false)
+            navigate('/');
         }
     }
 

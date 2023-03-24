@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Card, FormField, Loader } from '../components';
+import {useAuthContext} from "../hooks/useAuthContext";
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -17,7 +18,7 @@ const RenderCards = ({ data, title }) => {
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
-
+  const {user} = useAuthContext();
   const [searchText, setSearchText] = useState('');
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState(null);
@@ -30,6 +31,7 @@ const Home = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${user.token}`
         },
       });
 
@@ -39,8 +41,8 @@ const Home = () => {
         console.log(result)
       }
     } catch (err) {
-      alert("Error: "+err);
-      console.log("Error: "+err);
+      alert("Error: " + err);
+      console.log("Error: " + err);
     } finally {
       setLoading(false);
     }
