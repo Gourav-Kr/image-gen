@@ -12,7 +12,7 @@ export const useRegister = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/v1/user/register', {
+        const response = await fetch('https://image-from-imagination.onrender.com/api/v1/user/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password })
