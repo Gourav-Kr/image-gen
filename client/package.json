@@ -1,5 +1,5 @@
 {
-	"proxy": "http://localhost:8080",
+	"proxy": "https://image-from-imagination.onrender.com",
 	"name": "client",
 	"private": true,
 	"version": "0.0.0",
